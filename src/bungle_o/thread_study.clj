@@ -1,4 +1,4 @@
-(ns bungle-o.thread_study
+(ns bungle-o.hornet-study
   (:import (org.hornetq.core.config.impl ConfigurationImpl)
            (org.hornetq.api.core TransportConfiguration)
            (org.hornetq.core.remoting.impl.invm InVMAcceptorFactory
@@ -7,7 +7,7 @@
                                     HornetQServer)
            (org.hornetq.api.core.client HornetQClient)))
 
-(def state (atom {:consumers {} :producers {}}))
+(def state (atom {}))
 
 (defn memoize! [k f]
   (if (not (k state))
@@ -47,10 +47,14 @@
 
 (defn queue [name]
   (conditionally-start-server)
-  (.createQueue (session) name name))
+  ;cargo culted from the example, really have no idea why we need to create a "core session"
+  ;this code works using the cached session
+  (let [core-session (.createSession (session-factory) false false false)]
+    (.createQueue core-session name name true)
+    (.close core-session)))
 
 (defn shutdown-queues []
-  (if-let [sf(:session-factory @state)]
+  (if-let [sf (:session-factory @state)]
     (.close sf))
   (if-let [server (:server @state)]
     (.stop server)))
@@ -74,18 +78,16 @@
 
 ;TODO
 ;collect consumers/producers and shut them down on exit
+;getting hornet to write to something besides stdout/stderr?
 
 (queue "my-queue")
 (qpush "my-queue" "I'm sending a message!")
 (println (qpop "my-queue")) 
 (shutdown-queues)
 
-;  (qpush "Queue" "message")
+; PIE-SKY!
 ;
-;(qpop "Queue")
-;
-;  (qpeek "Queue)
+;  (qpeek "Queue")
 ;
 ;  (qwork "Queue" {:threads 20}
 ;    (fn [msg] ...))
-;  (shutdown-queues)

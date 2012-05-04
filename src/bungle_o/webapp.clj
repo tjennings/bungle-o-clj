@@ -17,8 +17,8 @@
   (POST "/notifier_api/v2/notices/" [:as req]
         (let [message (prepare-message (:body req))]
           (if (:valid message)
-            (println "VALID\n\n" message) 
-            (println "INVALID\n\n" message ))))
+            (println "VALID\n") 
+            (println "INVALID\n"))))
   (route/not-found "<h1>Page not found</h1>"))
 
 (defn run []

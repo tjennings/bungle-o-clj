@@ -1,0 +1,6 @@
+#! /usr/bin/ruby
+
+#Apache bench!
+10000.times do |n|
+  puts `curl -X POST -d @samples/clean-airbrake-sample.xml http://localhost:8080/notifier_api/v2/notices/`
+end

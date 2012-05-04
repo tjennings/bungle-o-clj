@@ -13,6 +13,6 @@ for f in lib/*/*.jar; do
     CLASSPATH=$CLASSPATH:$f
 done
 
-java -client -Xmx3000m -cp $CLASSPATH clojure.main src/bungle_o/thread_study.clj $@ <&0
+java -client -Xmx3000m -cp $CLASSPATH clojure.main src/bungle_o/hornet_study.clj $@ <&0
 
 popd > /dev/null
