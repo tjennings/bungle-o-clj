@@ -1,13 +1,15 @@
-# bungle-o
+## INSTALL
 
-FIXME: write description
+1. lein deps
+2. cp -r local_libs lib (set up hornetq jars)
 
-## Usage
+##Usage
 
-FIXME: write
+- Start the server with bin/server, post exceptions to it with bin/post-sample
+- Run the embedded hornetq prototype with bin/hornet_study
 
 ## License
 
-Copyright (C) 2012 FIXME
+Copyright (C) 2012 Tyler Jennings
 
 Distributed under the Eclipse Public License, the same as Clojure.
