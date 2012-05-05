@@ -7,4 +7,4 @@
                            [org.clojure/data.xml "0.0.3"]
                            [org.hornetq/hornetq-core "2.2.16.Final"]
                            [org.jboss.netty/netty "3.2.7.Final"]]
-            :dev-dependencies [[lein-beanstalk "0.2.0"]])
+            :plugins [[lein-beanstalk "0.2.2"]])

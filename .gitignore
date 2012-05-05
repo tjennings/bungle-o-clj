@@ -6,3 +6,4 @@ pom.xml
 /checkouts
 .lein-deps-sum
 /.lein-failures
+/.lein-plugins
