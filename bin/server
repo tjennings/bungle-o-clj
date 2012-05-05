@@ -1,4 +1,2 @@
 #!/usr/bin/env bash
-
-export CLASSPATH="src:lib/*:$CLASSPATH"
-java -client -Xmx3000m clojure.main -e "(use 'bungle-o.webapp) (run)" $@
+lein run

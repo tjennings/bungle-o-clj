@@ -1,6 +1,5 @@
 (ns bungle-o.core
-  (:require [bungle-o.webapp :as web])
-  (:gen-class :main true))
+  (:use ring.adapter.jetty)
+  (:require [bungle-o.webapp :as web]))
 
-(defn -main [& args]
-  (web/run))
+(defn -main [& args] (run-jetty web/main-routes {:port 8080}))
