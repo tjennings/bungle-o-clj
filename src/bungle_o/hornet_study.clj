@@ -88,6 +88,9 @@
     (.createQueue core-session name name true)
     (.close core-session)))
 
+(def num-processors
+  (.. Runtime getRuntime availableProcessors))
+
 (defn qcount [name]
   (let [core-session (.createSession (session-factory) false false false)]
     (try 
@@ -106,19 +109,18 @@
       (.getStringProperty msg "key"))))
 
 (defn qwork [name a-fn]
-  (let [session (.createSession (session-factory) true true 1)]
-    (dotimes [i 2000]
+  ;Fucking MAGIC! createSession sig is (autocommit-ack, autocommit-send, ack batch size)
+  (let [session (.createSession (session-factory) true true 1)] 
+    (dotimes [i (+ 2 num-processors)]
       (let [consumer (.createConsumer session name)]
         (.setMessageHandler consumer (message-handler (fn [msg] (a-fn msg))))))
        (.start session)))
 
 ;TODO
-;collect consumers/producers and shut them down on exit
 ;getting hornet to write to something besides stdout/stderr?
-;Instead of threads workers set a message handler on N consumers? 
+;configurable persistent queing 
 
 ; Example
-
 (queue "my-queue") ;create our queue
 
 (dotimes [i 20] ;push 20 messages
