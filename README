@@ -1,7 +1,6 @@
 ## INSTALL
 
 1. lein deps
-2. cp -r local_libs lib (set up hornetq jars)
 
 ##Usage
 
