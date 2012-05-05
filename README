@@ -1,13 +1,25 @@
-## INSTALL
+= Bungle-O
 
-1. lein deps
+== Install
 
-##Usage
+1. Run `lein deps`
 
-- Start the server with bin/server, post exceptions to it with bin/post-sample
-- Run the embedded hornetq prototype with bin/hornet_study
+== Usage
 
-## License
+1. Start the server with `lein ring server`, post exceptions to it with `bin/post-sample`
+2. Run the embedded hornetq prototype with `bin/hornet_study`
+
+== Deployment
+
+1. Set up AWS credentials as per https://github.com/weavejester/lein-beanstalk
+2. Run `lein beanstalk deploy <env>` where <env> is one of development, production, staging
+
+== Contributors
+
+* Tyler Jennings
+* Bo Jeanes
+
+== License
 
 Copyright (C) 2012 Tyler Jennings
 
