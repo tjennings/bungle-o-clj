@@ -1,5 +1,6 @@
 (ns bungle-o.core
-  (:require [bungle-o.webapp :as web]))
+  (:require [bungle-o.webapp :as web])
+  (:gen-class :main true))
 
-(defn main []
+(defn -main [& args]
   (web/run))

@@ -1,4 +1,5 @@
 (defproject bungle-o "1.0.0-SNAPSHOT"
+            :main bungle-o.core
             :description "FIXME: write description"
             :dependencies [[compojure "1.0.1"]
                            [ring "1.0.2"]

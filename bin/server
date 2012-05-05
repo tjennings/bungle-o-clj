@@ -1,18 +1,4 @@
 #!/usr/bin/env bash
-CLASSPATH=classes:src
 
-base=`dirname $0`
-
-pushd $base/.. > /dev/null
-
-for f in lib/*.jar; do
-    CLASSPATH=$CLASSPATH:$f
-done
-
-for f in lib/*/*.jar; do
-    CLASSPATH=$CLASSPATH:$f
-done
-
-java -client -Xmx3000m -cp $CLASSPATH clojure.main -e "(use 'bungle-o.webapp) (run)" $@ <&0
-
-popd > /dev/null
+export CLASSPATH="src:lib/*:$CLASSPATH"
+java -client -Xmx3000m clojure.main -e "(use 'bungle-o.webapp) (run)" $@
